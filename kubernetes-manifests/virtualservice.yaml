@@ -1,0 +1,19 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: app-route
+spec:
+  hosts:
+    - "*"
+  gateways:
+    - istio-system/ingressgateway
+  http:
+  - route:
+    - destination:
+        host: app-service
+        subset: v1
+      weight: 80
+    - destination:
+        host: app-service
+        subset: v2
+      weight: 20
